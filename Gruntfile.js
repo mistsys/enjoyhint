@@ -6,7 +6,7 @@ module.exports = function(grunt){
                 separator: ';'
             },
             dist:{
-                src:['src/*.js', 'lib/kineticjs/kinetic.min.js', 'lib/jquery.scrollTo/jquery.scrollTo.min.js'],
+                src:['node_modules/jquery/dist/jquery.min.js', 'src/*.js', 'node_modules/kinetic/kinetic.min.js','node_modules/jquery.scrollTo/jquery.scrollTo.min.js'],
                 dest: '<%= pkg.name %>.js'
             }
         },
