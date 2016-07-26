@@ -313,3 +313,10 @@ var EnjoyHint = function(_options) {
 
     init();
 };
+
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+exports['default'] = EnjoyHint;
