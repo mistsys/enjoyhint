@@ -316,14 +316,7 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
 
 
     init();
-};
-
-
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
-
-exports['default'] = EnjoyHint;;CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+};;CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
     if (w < 2 * r) r = w / 2;
     if (h < 2 * r) r = h / 2;
     this.beginPath();
