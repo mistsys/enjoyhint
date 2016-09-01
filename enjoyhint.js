@@ -119,7 +119,7 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
             setTimeout(function(){
                 that.clear();
             }, 250);
-            $(document.body).scrollTo(step_data.selector, step_data.scrollAnimationSpeed || 250, {offset: -100});
+            $('.appView-content').scrollTo(step_data.selector, step_data.scrollAnimationSpeed || 250, {offset: -100});
             setTimeout(function () {
                 var $element = $(step_data.selector);
                 var event = makeEventName(step_data.event);
