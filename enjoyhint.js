@@ -119,6 +119,9 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
             setTimeout(function(){
                 that.clear();
             }, 250);
+            if(step_data.tutorialOverModal){
+                $('.modalOverlay').css('z-index', 1000);
+            }
             $('.appView-content').scrollTo(step_data.selector, step_data.scrollAnimationSpeed || 250, {offset: -100});
             setTimeout(function () {
                 var $element = $(step_data.selector);
