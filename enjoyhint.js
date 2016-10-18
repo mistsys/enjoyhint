@@ -30,7 +30,10 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
             $('.enjoyhint').remove();
         $('body').css({'overflow':'hidden'});
         $(document).on("touchmove",lockTouch);
-
+        $(document).on('mousedown', '.enjoyhint_disable_events',function(e){           
+            e.preventDefault();
+            e.stopPropagation();
+        })
         $body.enjoyhint({
             onNextClick: function () {
                 nextStep();

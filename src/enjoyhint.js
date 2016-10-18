@@ -26,7 +26,10 @@ var EnjoyHint = function(_options) {
             $('.enjoyhint').remove();
         $('body').css({'overflow':'hidden'});
         $(document).on("touchmove",lockTouch);
-
+        $(document).on('mousedown', '.enjoyhint_disable_events',function(e){           
+            e.preventDefault();
+            e.stopPropagation();
+        })
         $body.enjoyhint({
             onNextClick: function () {
                 nextStep();
