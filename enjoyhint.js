@@ -5,6 +5,7 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
 ;var EnjoyHint = function(_options) {
     var that = this;
     // Some options
+    var updateCheckInterval = null;
     var defaults = {
         onStart: function () {
 
@@ -130,6 +131,10 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
                 var $element = $(step_data.selector);
                 var event = makeEventName(step_data.event);
 
+                if(updateCheckInterval){
+                    clearInterval(updateCheckInterval);
+                }
+
                 $body.enjoyhint('show');
                 $body.enjoyhint('hide_next');
                 var $event_element = $element;
@@ -237,6 +242,28 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
                     shape_data.height = h + shape_margin;
                 }
                 $body.enjoyhint('render_label_with_shape', shape_data);
+
+                //code for dynamic elements, to redraw the element if it is updated.
+                var stepCheck = 'newStep';
+                updateCheckInterval = setInterval(function(){ 
+                    var new_offset = $element.offset();
+                    var new_w = $element.outerWidth();
+                    var new_h = $element.outerHeight();
+                    var new_center_x = new_offset.left + Math.round(new_w / 2);
+                    var new_center_y = new_offset.top + Math.round(new_h / 2)  - $(document).scrollTop();
+                    var new_width = new_w + shape_margin;
+                    var new_height = new_h + shape_margin;
+                    if((Math.abs(new_width - shape_data.width) > 1 || Math.abs(new_height - shape_data.height) > 1) && stepCheck==='oldStep'){
+                        shape_data.center_x = new_center_x;
+                        shape_data.center_y = new_center_y;
+                        shape_data.width = Math.round(new_w + shape_margin);
+                        shape_data.height = Math.round(new_h + shape_margin);
+                        $body.enjoyhint('render_label_with_shape', shape_data);
+                    }
+                    stepCheck='oldStep';
+                }, 2000);
+
+
             }, step_data.scrollAnimationSpeed + 20 || 270);
     } else {
         $body.enjoyhint('hide');
@@ -249,6 +276,7 @@ if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),hb={set:function(a,b
         stepAction();
     };
     var skipAll = function(){
+        if(updateCheckInterval){clearInterval(updateCheckInterval)}
         var step_data = data[current_step];
         var $element = $(step_data.selector);
         off(step_data.event);
